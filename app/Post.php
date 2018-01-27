@@ -11,4 +11,10 @@ class Post extends BaseModel
     {
         return $this->belongsTo('App\User','user_id','id');
     }
+
+    //关联到评论表
+    public function comments()
+    {
+        return $this->hasMany('App\Comment')->orderBy('create_at','desc');
+    }
 }
