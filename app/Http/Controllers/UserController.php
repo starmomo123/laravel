@@ -6,9 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Storage;
 use App\User;
-
+use App\Post;
 class UserController extends Controller
 {
+
+    //个人主页
+    public function index(User $user)
+    {
+        $page=request('page');
+        $posts = Post::where('user_id',$user->id)
+            ->orderBy('created_at','desc')
+            ->limit(($page-1)*2,2)
+            ->paginate(2);
+        return view('user.index',compact('user','posts'));
+    }
+
     //个人设置页面
     public function setting()
     {

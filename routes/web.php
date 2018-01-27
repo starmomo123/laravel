@@ -35,6 +35,8 @@ Route::group(['middleware'=>'auth:web'],function(){
     //个人设置行为
         Route::post('user/me/setting','UserController@settingStore');
 
+        Route::get('user/{user}','UserController@index');
+
 
     //文章列表页面
         Route::get('/posts','PostController@index');

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Services\TestService;
+use App\Services\TimeHandleService;
 
 class TestServiceProvider extends ServiceProvider
 {
@@ -27,5 +28,6 @@ class TestServiceProvider extends ServiceProvider
         $this->app->singleton('test',function(){
             return new TestService();
         });
+
     }
 }
