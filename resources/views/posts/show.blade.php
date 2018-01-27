@@ -37,16 +37,20 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">评论</div>
-                
+
                 <!-- List group -->
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h5>2017-05-28 10:15:08 by Kassandra Ankunding2</h5>
-                        <div>
-                            这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论
-                        </div>
-                    </li>
-                </ul>
+                @if($post->comments)
+                    @foreach($post->comments as $comment)
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h5>{{$comment->created_at->toFormattedDateString()}} by {{$comment->user->name}}</h5>
+                                <div>
+                                    {{$comment->content}}
+                                </div>
+                            </li>
+                        </ul>
+                    @endforeach
+                @endif
             </div>
 
             <div class="panel panel-default">
@@ -59,7 +63,6 @@
                         {{csrf_field()}}
                         <li class="list-group-item">
                             <textarea name="content" class="form-control" rows="10"></textarea>
-                            @include('luo.error')
                             <button class="btn btn-default" type="submit">提交</button>
                         </li>
                     </form>

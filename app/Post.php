@@ -15,6 +15,6 @@ class Post extends BaseModel
     //关联到评论表
     public function comments()
     {
-        return $this->hasMany('App\Comment')->orderBy('create_at','desc');
+        return $this->hasMany('App\Comment')->orderBy('created_at','desc');
     }
 }

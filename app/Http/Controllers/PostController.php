@@ -12,12 +12,14 @@ class PostController extends Controller
     //文章列表页面
     function index(Request $request){
         $page=$request->input('page');
-        $posts = Post::orderby('created_at','desc')->limit(($page-1)*4,4)->paginate(4);
+        $posts = Post::orderBy('created_at','desc')
+                     ->withCount('comments')//使用关联模型获取评论数
+                     ->limit(($page-1)*4,4)
+                     ->paginate(4);
         return view('posts.index',compact('posts'));
     }
 
     //文章详情页面
-
     function show($id){
         $post = Post::find($id);
         return view('posts.show',compact('post'));
@@ -99,6 +101,7 @@ class PostController extends Controller
         return \Redirect::back()->withErrors("删除操作失败");
     }
 
+    //文章评论
      public function comment($id)
      {
          $post=Post::find($id);
