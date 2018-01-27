@@ -45,9 +45,11 @@ Route::group(['middleware'=>'auth:web'],function(){
         Route::get('posts/create', 'PostController@create');
         Route::post('/posts','PostController@store');
     //文章更新页面
-        Route::get('/posts/{posts}/edit','PostController@edit');
-        Route::put('/posts/{post}','PostController@update')->where('id','[0-9]+');
+        Route::get('/posts/{post}/edit','PostController@edit');
 
+        Route::put('/posts/{post}','PostController@update');
+    //添加评论
+        Route::post('/posts/{id}/comment','PostController@comment')->where('id','[0-9]+');
     //文章删除页面
     //使用post默认代表数据表,id则不能,除非改模型
         Route::get('/posts/{post}/delete','PostController@delete');

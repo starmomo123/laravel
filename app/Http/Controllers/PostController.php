@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -16,6 +17,7 @@ class PostController extends Controller
     }
 
     //文章详情页面
+
     function show($id){
         $post = Post::find($id);
         return view('posts.show',compact('post'));
@@ -97,8 +99,28 @@ class PostController extends Controller
         return \Redirect::back()->withErrors("删除操作失败");
     }
 
+     public function comment($id)
+     {
+         $post=Post::find($id);
+         $this->validate(request(),[
+            'content'=>'required|min:6'
+         ]);
+
+         $user_id=\Auth::id();
+         $comment = new Comment();
+         $comment->user_id=$user_id;
+         $comment->post_id=$post->id;
+         $comment->content=request('content');
+
+         if($post->comments()->save($comment)){
+             return back();
+         }
+
+         return back()->withErrors("增加评论失败");
+     }
+
     //等下处理图片上传
     public function imageUpload(Request $request){
-        dd($request->all());
+
     }
 }
