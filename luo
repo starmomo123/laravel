@@ -1,0 +1,49 @@
+https://d.laravel-china.org/docs/5.5
+https://www.jianshu.com/u/63439e7c93e5
+
+第一天
+laravel可以使用tinker来实现对模型的操作,给测试带来了便利
+laravel使用migrate实现数据迁移
+laravel可以使用seeder来实现数据填充
+修改app.php中的'timezone' => 'Asia/Shanghai'来设置时间
+blade框架中@include,@extends,@yield,@section可以实现高复用的模板
+以及@foreach,@if等等。。。。。。。
+laravel框架的表单字段设置{{ csrf_field() }}值,可以跟踪用户提交过来的表单数据是否是来自这个网站,
+这样可以防止收到其他网站的攻击
+laravel框架通过在表单{{ method_field("Put|Delete|Patch")}}等等来设置其他的提交方式
+
+第二天
+laravel框架中所有的时间都是Carbon类,可以使用他来转换成我们想要的时间格式
+laravel框架使用model->paginate(num)可以轻松的实现分类
+laravel框架可以使用 facory(类名,行数)->create() 可以轻松实现数据填充到数据库
+$factory->define(App\Post::class,function(Faker $faker){
+    return [
+        //标题随机显示6个单词
+        'title'  => $faker->sentence(6),
+        //内容显示18个句子
+        'content'  => $faker->paragraph(18)
+    ];
+});
+
+第三天
+tinker代码的调试工具
+表单提交的三部曲：数据验证、业务逻辑、视图渲染
+laravel使用valiadate(参数,验证规则,错误提示(可选))可以轻松实现数据验证
+wangEdit富文本编辑器的使用
+相同代码写到一个模板中
+服务容器:laravel框架把所有的对象实例和对象的名称绑定到一起，
+当我们需要时,我们可以根据对象的名称直接获取到这个对象的实例。
+
+Ioc控制反转：当一个A对象在方法中使用B对象时,我们把B对象绑定到服务容器中,
+当我们需要使用B对象时，我们可以使用容器对象直接获取B对象,而不是用New关键字来实例B对象,
+这样,我们可以极大地解耦了A和B对象之间的依赖。
+
+依赖注入：laravel在一个构造函数或者方法中传入对象B,而这个B对象存储在服务容器中,我们
+就可以根据这个B对象的名称来获取B对象的实例。
+
+服务提供者ServiceProvider类有register和boot方法,register方法是在所有服务加载前进行加载
+而boot则是在所有服务加载之后进行加载,在服务提供者中设置protected $defer=true,可以进行延迟加载.。
+延迟加载则是当需要用到这个对象时才把他加载进来
+
+
+
