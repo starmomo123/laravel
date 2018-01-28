@@ -143,6 +143,20 @@ class PostController extends Controller
          return back();
      }
 
+     //文章搜索功能
+
+    public function search(Request $request)
+    {
+        $this->validate(request(),[
+           'query'=>'required|min:1|string'
+        ]);
+        $query=request('query');
+        $posts = Post::where('title','like','%'.$query.'%')
+                    ->orderBy('created_at','desc')
+                    ->get();
+        $total = $posts->count();
+        return view('posts.search',compact('posts','total','query'));
+    }
     //等下处理图片上传
     public function imageUpload(Request $request){
 

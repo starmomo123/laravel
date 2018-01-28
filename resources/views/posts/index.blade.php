@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-sm-8 blog-main">
-        {{--简书滚动区--}}
+        {{--轮播图--}}
     <div>
         <div id="carousel-example" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
