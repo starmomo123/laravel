@@ -34,9 +34,16 @@ Route::group(['middleware'=>'auth:web'],function(){
         Route::get('user/me/setting','UserController@setting');
          //个人设置行为
         Route::post('user/me/setting','UserController@settingStore');
-
+        //个人中心
         Route::get('user/{user}','UserController@index');
+        //用户关注
+        Route::post('user/{user}/dostar','UserController@doStar');
+        //取消关注
+        Route::post('user/{user}/dounstar','UserController@doUnStar');
 
+
+        //通知页面
+        Route::post('/notices','NoticeController@index');
 
          //文章列表页面
         Route::get('/posts','PostController@index');
@@ -59,7 +66,7 @@ Route::group(['middleware'=>'auth:web'],function(){
         Route::get('/posts/{post}/zan','PostController@zan');
         //文章取消赞功能
         Route::get('/posts/{post}/unzan','PostController@unzan');
-
+        //文章搜索
         Route::post('/posts/search','PostController@search');
 
         //上传图片的url
