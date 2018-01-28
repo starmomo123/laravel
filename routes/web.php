@@ -56,6 +56,9 @@ Route::group(['middleware'=>'auth:web'],function(){
     //使用post默认代表数据表,id则不能,除非改模型
         Route::get('/posts/{post}/delete','PostController@delete');
 
+        Route::get('/posts/{post}/zan','PostController@zan');
+        Route::get('/posts/{post}/unzan','PostController@unzan');
+
     //上传图片的url
         Route::any('/posts/image/upload','PostController@imageUpload');
 });

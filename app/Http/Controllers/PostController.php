@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Post;
+use App\Zan;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -13,7 +15,7 @@ class PostController extends Controller
     function index(Request $request){
         $page=$request->input('page');
         $posts = Post::orderBy('created_at','desc')
-                     ->withCount('comments')//使用关联模型获取评论数
+                     ->withCount(['comments','zans'])//使用关联模型获取评论数和赞数
                      ->limit(($page-1)*4,4)
                      ->paginate(4);
         return view('posts.index',compact('posts'));
@@ -120,6 +122,25 @@ class PostController extends Controller
          }
 
          return back()->withErrors("增加评论失败");
+     }
+
+     //文章赞功能
+     public function zan(Post $post)
+     {
+         $param=[
+             'user_id'=>\Auth::id(),
+             'post_id'=>$post->id
+         ];
+         //如果存在这条记录则返回,否则创建
+         Zan::firstOrCreate($param);
+         return back();
+     }
+
+     //文章取消赞功能
+     public function unzan(Post $post)
+     {
+         $post->zan(\Auth::id())->delete();
+         return back();
      }
 
     //等下处理图片上传

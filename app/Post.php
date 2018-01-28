@@ -17,4 +17,16 @@ class Post extends BaseModel
     {
         return $this->hasMany('App\Comment')->orderBy('created_at','desc');
     }
+
+    //一篇文章一个用户只能有一个赞
+    public function zan($user_id)
+    {
+        return $this->hasOne(App\Zan::class)->where('user_id',$user_id);
+    }
+
+    //关联到一篇文章有多个赞
+    public function zans()
+    {
+        return $this->hasMany(App\Zan::class);
+    }
 }
