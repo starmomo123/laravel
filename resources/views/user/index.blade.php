@@ -9,7 +9,7 @@
             </p>
 
 
-            <footer>关注：4｜粉丝：0｜文章：9</footer>
+            <footer>关注：4｜粉丝：0｜文章：{{$total}}</footer>
         </blockquote>
     </div>
     <div class="col-sm-8 blog-main">

@@ -18,7 +18,8 @@ class UserController extends Controller
             ->orderBy('created_at','desc')
             ->limit(($page-1)*2,2)
             ->paginate(2);
-        return view('user.index',compact('user','posts'));
+        $total = $posts->total();
+        return view('user.index',compact('user','posts','total'));
     }
 
     //个人设置页面
