@@ -43,7 +43,7 @@ Route::group(['middleware'=>'auth:web'],function(){
 
 
         //通知页面
-        Route::post('/notices','NoticeController@index');
+        Route::get('/notices','NoticeController@index');
 
          //文章列表页面
         Route::get('/posts','PostController@index');
