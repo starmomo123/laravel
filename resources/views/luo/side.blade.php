@@ -23,18 +23,13 @@
         </div>
 
         <ul class="category-root list-group">
-            <li class="list-group-item">
-                <a href="/topic/1">旅游
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="/topic/2">轻松
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="/topic/5">测试专题
-                </a>
-            </li>
+            {{--//这里使用视图合成器完成的--}}
+            @foreach($topics as $topic)
+                <li class="list-group-item">
+                    <a href="/topics/{{$topic->id}}">{{$topic->topic}}
+                    </a>
+                </li>
+            @endforeach
         </ul>
 
     </aside>

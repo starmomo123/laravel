@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Topic;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -16,6 +18,12 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+
+        //视图合成器
+        \View::composer('luo.side',function($view){
+            $topics = \App\Topic::all();
+            $view->with('topics',$topics);
+        });
     }
 
     /**

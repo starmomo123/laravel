@@ -71,5 +71,12 @@ Route::group(['middleware'=>'auth:web'],function(){
 
         //上传图片的url
         Route::any('/posts/image/upload','PostController@imageUpload');
+
+
+
+        //专题详情页面
+        Route::get('/topics/{topic}','TopicController@show');
+        //投稿功能
+        Route::get('/topics/{topic}/submit','TopicController@doSubmit');
 });
 
