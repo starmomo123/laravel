@@ -22,33 +22,47 @@ Route::group(['middleware'=>'auth:admin'],function(){
     //后台主页路由
     Route::get('/home','IndexController@index');
 
-    //管理人员模块
-    Route::get('/users','UserController@index');
-    //创建管理人员
-    Route::get('/users/create','UserController@create');
-    //创建管理人员逻辑
-    Route::post('/users/store','UserController@store');
-    //角色管理路由
-    Route::get('/users/{user}/role','UserController@role');
-    //角色管理逻辑路由
-    Route::post('/users/{user}/role','UserController@updateRole');
 
-    //文章管理模块路由
-    Route::get('/posts','PostController@index');
-    Route::post('/posts/{post}/status','PostController@status');
+    Route::group(['middleware'=>'can:system'],function(){
+        //管理人员模块
+        Route::get('/users','UserController@index');
+        //创建管理人员
+        Route::get('/users/create','UserController@create');
+        //创建管理人员逻辑
+        Route::post('/users/store','UserController@store');
+        //角色管理路由
+        Route::get('/users/{user}/role','UserController@role');
+        //角色管理逻辑路由
+        Route::post('/users/{user}/role','UserController@updateRole');
 
-    //角色管理
-    Route::get('roles','RoleController@index');
-    Route::get('roles/create','RoleController@create');
-    Route::post('roles/store','RoleController@store');
-    Route::get('roles/{role}/permission','RoleController@permission');
-    Route::post('roles/{role}/permission','RoleController@storePermission');
+        //角色管理
+        Route::get('roles','RoleController@index');
+        Route::get('roles/create','RoleController@create');
+        Route::post('roles/store','RoleController@store');
+        Route::get('roles/{role}/permission','RoleController@permission');
+        Route::post('roles/{role}/permission','RoleController@storePermission');
 
-    //权限管理
-    Route::get('permissions','PermissionController@index');
-    Route::get('permissions/create','PermissionController@create');
-    Route::post('permissions/store','PermissionController@store');
+        //权限管理
+        Route::get('permissions','PermissionController@index');
+        Route::get('permissions/create','PermissionController@create');
+        Route::post('permissions/store','PermissionController@store');
 
+    });
 
+    Route::group(['middleware'=>'can:posts'],function(){
+        //文章管理模块路由
+        Route::get('/posts','PostController@index');
+        Route::post('/posts/{post}/status','PostController@status');
+    });
+
+    Route::group(['middleware'=>'can:topic'],function(){
+        //文章管理模块路由
+        Route::get('/topics','TopicController@index');
+    });
+
+    Route::group(['middleware'=>'can:notice'],function(){
+        //文章管理模块路由
+        Route::get('/notices','NoticeController@index');
+    });
 
 });
