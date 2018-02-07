@@ -42,7 +42,7 @@
                 <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} by <a href="/user/{{$post->user->id}}">{{$post->user->name}}</a></p>
 
                 {{--不转义HTML标签--}}
-                {!! str_limit($post->content,100,'...') !!}
+                <p>{!! str_limit($post->content,100,'...') !!}</p>
                 <p class="blog-post-meta">赞 {{$post->zans_count}}  | 评论 {{$post->comments_count}}</p>
             </div>
         @endforeach

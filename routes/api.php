@@ -1,37 +1,54 @@
 <?php
-
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| api
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| Here you may register all of the event broadcasting channels that your
+| application supports. The given channel authorization callbacks are
+| used to check if an authenticated user can listen to the channel.
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-//
-////Route::get('blog/{name}/{age}',function($name,$age){
-////    return "我的姓名：{$name};我的年龄：{$age}";
-////});
-//
-//Route::get('blog/{name}/{age}','BlogController@getBlog');
-//
-//Route::match(['get','post'],'test1',function(){
-//    return "我是test1";
-//});
-//
-//Route::any('test2',function(){
-//    return "我是test2";
-//});
-//
-//Route::get('home',function(){
-//    return response('hello world','200')
-//        ->header('Content-Type', 'text/plain');
-//});
+//后台登录路由
+Route::get('/login','LoginController@index');
+//后台登录逻辑
+Route::post('/login','LoginController@login');
+//后台登出路由
+Route::get('/logout','LoginController@logout');
+
+
+Route::group(['middleware'=>'auth:admin'],function(){
+    //后台主页路由
+    Route::get('/home','IndexController@index');
+
+    //管理人员模块
+    Route::get('/users','UserController@index');
+    //创建管理人员
+    Route::get('/users/create','UserController@create');
+    //创建管理人员逻辑
+    Route::post('/users/store','UserController@store');
+    //角色管理路由
+    Route::get('/users/{user}/role','UserController@role');
+    //角色管理逻辑路由
+    Route::post('/users/{user}/role','UserController@updateRole');
+
+    //文章管理模块路由
+    Route::get('/posts','PostController@index');
+    Route::post('/posts/{post}/status','PostController@status');
+
+    //角色管理
+    Route::get('roles','RoleController@index');
+    Route::get('roles/create','RoleController@create');
+    Route::post('roles/store','RoleController@store');
+    Route::get('roles/{role}/permission','RoleController@permission');
+    Route::post('roles/{role}/permission','RoleController@storePermission');
+
+    //权限管理
+    Route::get('permissions','PermissionController@index');
+    Route::get('permissions/create','PermissionController@create');
+    Route::post('permissions/store','PermissionController@store');
+
+
+
+});
