@@ -73,4 +73,26 @@ class User extends Authenticatable
     {
         return $this->stars()->where('star_id',$uid)->count();
     }
+
+    //当前用户收到了哪些通知
+    public function notices()
+    {
+        return $this->belongsToMany(\App\Notice::class,'user_notices','user_id','notice_id')
+                    ->withPivot(['user_id','notice_id']);
+    }
+
+    //为当前用户增加一个通知
+    public function addNotice($notice)
+    {
+        $this->notices()->save($notice);
+    }
+
+    //为当前用户删除一个通知
+    public function deleteNotice($notice)
+    {
+//        $this->notices()->delete($notice);
+        $this->notices()->detach($notice);
+    }
+
+
 }

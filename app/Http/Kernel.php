@@ -41,6 +41,8 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
             \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
         ],
     ];
 

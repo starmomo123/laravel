@@ -157,6 +157,8 @@ class PostController extends Controller
         $total = $posts->count();
         return view('posts.search',compact('posts','total','query'));
     }
+
+
     //等下处理图片上传
     public function imageUpload(Request $request){
         $path = $request->file('wangEditorH5File')->storePublicly(date('Ymd'));

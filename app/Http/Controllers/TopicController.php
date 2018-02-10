@@ -16,14 +16,16 @@ class TopicController extends Controller
         $topic = Topic::withCount('postTopics')
                       ->find($topic->id);
 
-        //某个专题的文章数
+
+        //找出某个专题下的前十条文章
         $posts = $topic->posts()
                     ->orderBy('created_at','desc')//按创建的时间进行排列
-                    ->take(10)//取得前十条数据
+                    ->take(4)//取得前十条数据
                     ->get();
 
         //属于我的文章，但没有投稿
         $mePosts=Post::authorBy(\Auth::id())->topicNotBy($topic->id)->get();
+
         return view('topic.show',compact('topic','posts','mePosts'));
     }
 

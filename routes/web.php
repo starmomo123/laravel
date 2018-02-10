@@ -28,6 +28,8 @@
         Route::get('user/me/setting','UserController@setting');
         //个人设置行为
         Route::post('user/me/setting','UserController@settingStore');
+        //个人中心路由
+        Route::get('user/{user}','UserController@index');
         //文章列表页面
         Route::get('/posts','PostController@index');
         //文章详情页面
@@ -44,4 +46,18 @@
         Route::get('/posts/{post}/delete','PostController@delete');
         //上传图片的url
         Route::any('/posts/image/upload','PostController@imageUpload');
-});
+
+        //文章搜索
+        Route::post('posts/search','PostController@search');
+
+        //专题路由
+        Route::get('topics/{topic}','TopicController@show');
+        Route::post('topics/{topic}/submit','TopicController@doSubmit');
+        //通知路由
+        Route::get('notices','NoticeController@index');
+
+    });
+
+
+    Route::get('test','TestController@index');
+

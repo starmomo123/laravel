@@ -38,16 +38,28 @@
             @endcan
             @can('topic')
                 <li class="active treeview">
-                    <a href="/admin/topics">
+                    <a href="#">
                         <i class="fa fa-book text-light-blue"></i> <span>专题管理</span>
+                        <span class="pull-right-container">
+                             <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/admin/topics"><i class="fa fa-circle-o text-green"></i> 专题列表</a></li>
+                    </ul>
                 </li>
             @endcan
             @can('notice')
                 <li class="active treeview">
-                    <a href="/admin/notices">
+                    <a href="#">
                         <i class="fa fa-envelope text-maroon"></i> <span>通知管理</span>
+                        <span class="pull-right-container">
+                             <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/admin/notices"><i class="fa fa-circle-o text-blue"></i> 通知列表</a></li>
+                    </ul>
                 </li>
             @endcan
         </ul>

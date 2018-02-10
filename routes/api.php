@@ -14,13 +14,15 @@
 Route::get('/login','LoginController@index');
 //后台登录逻辑
 Route::post('/login','LoginController@login');
-//后台登出路由
-Route::get('/logout','LoginController@logout');
+
 
 
 Route::group(['middleware'=>'auth:admin'],function(){
     //后台主页路由
     Route::get('/home','IndexController@index');
+
+    //后台登出路由
+    Route::get('/logout','LoginController@logout');
 
 
     Route::group(['middleware'=>'can:system'],function(){
@@ -58,11 +60,18 @@ Route::group(['middleware'=>'auth:admin'],function(){
     Route::group(['middleware'=>'can:topic'],function(){
         //文章管理模块路由
         Route::get('/topics','TopicController@index');
+        Route::get('/topics/create','TopicController@create');
+        Route::post('/topics/store','TopicController@store');
+
+        Route::get('/topics/{topic}','TopicController@delete')->where('topic','[0-9]+');
     });
 
     Route::group(['middleware'=>'can:notice'],function(){
         //文章管理模块路由
         Route::get('/notices','NoticeController@index');
+        Route::get('/notices/create','NoticeController@create');
+        Route::post('/notices/store','NoticeController@store');
+        Route::get('/notices/{notice}','NoticeController@delete')->where('notice','[0-9]+');
     });
 
 });

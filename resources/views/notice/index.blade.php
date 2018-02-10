@@ -3,10 +3,12 @@
 
 @section('content')
     <div class="col-sm-8 blog-main">
-        <div class="blog-post">
-            <p class="blog-post-meta">这是第三个通知</p>
+        @foreach($notices as $notice)
+            <div class="blog-post">
+                <p class="blog-post-meta">{{$notice->title}}</p>
 
-            <p>这是第三个通知这是第三个通知这是第三个通知这是第三个通知这是第三个通知这是第三个通知这是第三个通知这是第三个通知</p>
-        </div>
+                <p>{{$notice->content}}</p>
+            </div>
+        @endforeach
     </div><!-- /.blog-main -->
 @endsection
